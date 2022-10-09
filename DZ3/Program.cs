@@ -7,60 +7,56 @@
 8 4 2 4
 Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 */
-
-
 int GetNumber(string message)
 {
     Console.WriteLine(message);
     int number = int.Parse(Console.ReadLine() ?? "");
     return number;
 }
-
-int[,] InitMatrix(int m, int n)
+void FillArray(int[,] array)
 {
-    int[,] matrix = new int[m, n];
-
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int m = 0; m < array.GetLength(0); m++)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int n = 0; n < array.GetLength(1); n++)
         {
-            matrix[i, j] = i + j;
+            array[m, n] = new Random().Next(1, 20);
         }
     }
-
-    return matrix;
 }
-void PrintMatrix(int[,] matrix)
+void PrintArray(int[,] array)
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int m = 0; m < array.GetLength(0); m++)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int n = 0; n < array.GetLength(1); n++)
         {
-            Console.Write($"{matrix[i, j]} ");
+            Console.Write($"{array[m, n]} ");
         }
         Console.WriteLine();
     }
 }
-
-int SumDiag (int[,] matrix)
+string ArithmeticMean(int[,] array)
 {
-    int sum = 0;
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    string result = string.Empty;
+    for (int n = 0; n < array.GetLength(1); n++)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        double sum = 0;
+        int count = 0;
+        double mean = 0;
+        for (int m = 0; m < array.GetLength(0); m++)
         {
-            if (i == j)
-            sum += matrix[i,j]; 
+            sum += array[m, n];
+            count++;
         }
+        mean = sum / count;
+        result += mean.ToString() + " ";
     }
-    return sum;
+    return result;
 }
-
 int m = GetNumber("Введите число m");
 int n = GetNumber("Введите число n");
-int[,] matrix = InitMatrix(m, n);
-int sum = SumDiag(matrix);
+int[,] array = new int[m, n];
 
-Console.WriteLine("Матрица:");
-PrintMatrix(matrix);
-Console.WriteLine(sum);
+FillArray(array);
+PrintArray(array);
+Console.WriteLine();
+Console.WriteLine(ArithmeticMean(array));

@@ -7,46 +7,37 @@ m = 3, n = 4.
 8 7,8 -7,1 9
 */
 
-// array[i, j] = Convert.ToDouble(new Random().Next(-100, 100)) / 10;
-
 int GetNumber(string message)
 {
-  Console.WriteLine(message);
-  int number = int.Parse(Console.ReadLine());
-  return number;
+    Console.WriteLine(message);
+    int number = int.Parse(Console.ReadLine());
+    return number;
 }
 
-double [,] InitMatrix(int m, int n)
+void FillArray(double[,] array)
 {
-  double[,] matrix = new double[m, n];
-  Random rnd = new Random();
-
-  for (int i = 0; i < matrix.GetLength(0); i++)
-  {
-     for (int j = 0; j < matrix.GetLength(1); j++)
-     {
-         matrix[i,j] = Convert.ToDouble(new Random().Next(-100, 100)) / 10;;
-     }
-  }
-
-  return matrix;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = Convert.ToDouble(new Random().Next(-100, 100)) / 10;
+        }
+    }
 }
-
-void PrintMatrix(double[,] matrix)
+void PrintArray(double[,] array)
 {
-   for (int i = 0; i < matrix.GetLength(0); i++)
-   {
-      for (int j = 0; j < matrix.GetLength(1); j++)
-      {
-          Console.Write($"{matrix[i,j]} ");
-      }
-      Console.WriteLine();
-   }
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write($"{array[i, j]} ");
+        }
+        Console.WriteLine();
+    }
 }
-
 int m = GetNumber("Введите число m");
 int n = GetNumber("Введите число n");
-double[,] matrix = InitMatrix(m, n);
+double[,] array = new double[m, n];
 
-Console.WriteLine("Матрица:");
-PrintMatrix(matrix);
+FillArray(array);
+PrintArray(array);
